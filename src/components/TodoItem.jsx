@@ -33,6 +33,13 @@ const TodoItem = ({ itemProp, handleChange, delTodo, setUpdate  }) => {
         onChange={() => handleChange(itemProp.id)}
       />
       {user && <button onClick={handleEditing}>Edit</button>}
+      {!user && 
+        (
+          <li className="log-in">
+            <span>Log in to edit to-dos</span>
+          </li>
+        )
+      }
       <button onClick={() => delTodo(itemProp.id)}>Delete</button>
       {itemProp.title}
       </div>
