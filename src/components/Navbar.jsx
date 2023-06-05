@@ -3,6 +3,8 @@ import { useOnClickOutside } from "../useOnClickOutside";
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from '../context/AuthContext';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const links = [
   { path: '/', text: 'Home' },
@@ -12,8 +14,10 @@ const links = [
 ];
 const Navbar = () => {
   const { user, logout } = useAuthContext();
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    navigate('/login');
   };
   const [dropdown, setDropdown] = useState(false);
   const ref = useRef();
