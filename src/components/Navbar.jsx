@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import useOnClickOutside from '../useOnClickOutside';
@@ -25,26 +26,25 @@ const Navbar = () => {
         <ul>
           {links.map((link) => (
             <React.Fragment key={link.text}>
-              {(() => {
-                if (link.path === 'login' && !user) {
-                  return (
-                    <li>
-                      <NavLink to={link.path}>{link.text}</NavLink>
-                    </li>
-                  );
-                } if (link.path === 'profile' && user) {
-                  return (
-                    <li>
-                      <NavLink to={link.path}>{link.text}</NavLink>
-                    </li>
-                  );
-                }
-                return (
-                  <li>
-                    <NavLink to={link.path}>{link.text}</NavLink>
-                  </li>
-                );
-              })()}
+              {link.path === 'login' ? (
+                !user && (
+                <li>
+                  <NavLink to={link.path}>{link.text}</NavLink>
+                </li>
+                )
+              ) : link.path === 'profile' ? (
+                user && (
+                <li>
+                  <NavLink to={link.path}>
+                    {link.text}
+                  </NavLink>
+                </li>
+                )
+              ) : (
+                <li>
+                  <NavLink to={link.path}>{link.text}</NavLink>
+                </li>
+              )}
             </React.Fragment>
           ))}
           <li ref={ref}>
