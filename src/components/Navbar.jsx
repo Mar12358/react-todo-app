@@ -1,10 +1,7 @@
-import { useState, useRef } from "react";
-import { useOnClickOutside } from "../useOnClickOutside";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import useOnClickOutside from '../useOnClickOutside';
 import { useAuthContext } from '../context/AuthContext';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
 
 const links = [
   { path: '/', text: 'Home' },
@@ -24,52 +21,53 @@ const Navbar = () => {
   useOnClickOutside(ref, dropdown, () => setDropdown(false));
   return (
     <>
-    <nav className="navbar">
-      <ul>
-      {links.map((link) => {
-        return (
-          <React.Fragment key={link.text}>
-            {link.path === 'login' ? (
-              !user && (
-                <li>
-                  <NavLink to={link.path}>{link.text}</NavLink>
-                </li>
-              )
-            ) : link.path === 'profile' ? (
-              user && (
-                <li>
-                  <NavLink to={link.path}>
-                    {link.text}
-                  </NavLink>
-                </li>
-              )
-            ) : (
-              <li>
-                <NavLink to={link.path}>{link.text}</NavLink>
-              </li>
-            )}
-          </React.Fragment>
-        );
-      })}
-        <li ref={ref}>
-          <button onClick={() => setDropdown((prev) => !prev)}>
-            Services <span>&#8595;</span>
-          </button>
-          {dropdown && (
+      <nav className="navbar">
+        <ul>
+          {links.map((link) => (
+            <React.Fragment key={link.text}>
+              {(() => {
+                if (link.path === 'login' && !user) {
+                  return (
+                    <li>
+                      <NavLink to={link.path}>{link.text}</NavLink>
+                    </li>
+                  );
+                } if (link.path === 'profile' && user) {
+                  return (
+                    <li>
+                      <NavLink to={link.path}>{link.text}</NavLink>
+                    </li>
+                  );
+                }
+                return (
+                  <li>
+                    <NavLink to={link.path}>{link.text}</NavLink>
+                  </li>
+                );
+              })()}
+            </React.Fragment>
+          ))}
+          <li ref={ref}>
+            <button type="button" onClick={() => setDropdown((prev) => !prev)}>
+              Services
+              {' '}
+              <span>&#8595;</span>
+            </button>
+            {dropdown && (
             <ul>
               <li>Design</li>
               <li>Development</li>
             </ul>
-          )}
-        </li>
-      </ul>
-    </nav>
-    {user && (
+            )}
+          </li>
+        </ul>
+      </nav>
+      {user && (
       <div className="logout">
         <p>{user}</p>
-        {<button onClick={handleLogout}>Logout</button>}
+        <button type="button" onClick={handleLogout}>Logout</button>
       </div>
-    )}
+      )}
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 const InputTodo = ({ addTodoItem }) => {
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -17,7 +18,6 @@ const InputTodo = ({ addTodoItem }) => {
       setMessage('Please add item.');
     }
   };
-  
 
   return (
     <>
@@ -29,7 +29,7 @@ const InputTodo = ({ addTodoItem }) => {
           onChange={handleChange}
           className="input-text"
         />
-        <button className="input-submit">Submit</button>
+        <button type="button" className="input-submit">Submit</button>
       </form>
       <span className="submit-warning">{message}</span>
     </>
