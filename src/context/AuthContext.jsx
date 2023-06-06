@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
 import {
   useEffect, useState, useContext, createContext,
 } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
 
 const AuthContext = createContext(null);
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 
 const TodosList = ({
@@ -15,4 +16,10 @@ const TodosList = ({
     ))}
   </ul>
 );
+TodosList.propTypes = {
+  todosProps: PropTypes.node.isRequired,
+  handleChange: PropTypes.node.isRequired,
+  delTodo: PropTypes.node.isRequired,
+  setUpdate: PropTypes.node.isRequired,
+};
 export default TodosList;
