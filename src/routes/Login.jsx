@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from '../styles/Login.module.css';
 import { useAuthContext } from '../context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.pathname || '/';
-  console.log(location);
+  // console.log(location);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username) return;
@@ -28,7 +28,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <button>Login</button>
+          <button type="button">Login</button>
         </form>
       </div>
     </div>
